@@ -72,14 +72,6 @@ RSpec.describe Minesweeper::Board do
     end
   end
 
-  describe '#each_neighborhood' do
-    it 'yields each cell and its neighbors' do
-      cells = []
-      board.each_neighborhood { cells << _1 }
-      expect(cells.size).to eq 100
-    end
-  end
-
   describe '#contiguous_empty_cells' do
     it 'yields each empty cell and its neighbors' do
       cells = []
@@ -89,7 +81,7 @@ RSpec.describe Minesweeper::Board do
 
     context 'when the cell is not revealable' do
       before do
-        board[1][1].flagged = true
+        board[1][1].mine = true
       end
       it 'does not yield the cell' do
         cells = []
@@ -97,10 +89,10 @@ RSpec.describe Minesweeper::Board do
         expect(cells.size).to eq 0
       end
 
-      it 'can yield all the cells around the flagged cell' do
+      it 'can yield all the cells around the flagged cell'  do
         cells = []
-        board.contiguous_empty_cells(board[0][0]) { cells << _1 }
-        expect(cells.size).to eq 99
+        board.contiguous_empty_cells(board[8][8]) { cells << _1 }
+        expect(cells.size).to eq 96
       end
     end
 
@@ -115,7 +107,7 @@ RSpec.describe Minesweeper::Board do
       it 'does not yield the interior empty cells' do
         cells = []
         board.contiguous_empty_cells(board[5][5]) { cells << _1 }
-        expect(cells.size).to eq 94
+        expect(cells.size).to eq 92
       end
     end
   end

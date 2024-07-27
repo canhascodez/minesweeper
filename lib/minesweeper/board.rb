@@ -51,20 +51,26 @@ module Minesweeper
       end
     end
 
-    def each_neighborhood = each_cell { yield neighbors(_1) }
-
     def contiguous_empty_cells(cell)
+      # visit all empty cells, yield all neighbors unless mine or flagged
       return enum_for(:contiguous_empty_cells, cell) unless block_given?
 
       visited = Set.new
       queue = [cell]
+      numbers = Set.new
       until queue.empty?
         current_cell = queue.shift
-        next if visited.include?(current_cell) || !current_cell.revealable?
+        next if visited.include?(current_cell) || !current_cell.blank?
 
         visited << current_cell
         yield(current_cell)
-        immediate_neighbors(current_cell).each { |neighbor| queue << neighbor if neighbor.revealable? }
+        neighbors(current_cell).each do |neighbor|
+          queue << neighbor if neighbor.blank?
+          if neighbor.number? && !numbers.include?(neighbor)
+            yield neighbor
+            numbers << neighbor
+          end
+        end
       end
     end
 

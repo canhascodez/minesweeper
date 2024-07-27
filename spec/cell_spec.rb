@@ -34,12 +34,12 @@ RSpec.describe Minesweeper::Cell do
 
   describe '#to_s' do
     it 'returns a string representation of the cell' do
-      expect(cell.to_s).to eq '⬛'
+      expect(cell.to_s).to eq '▪'
     end
 
     it 'returns a string representation of the cell when hidden is false' do
       cell.hidden = false
-      expect(cell.to_s).to eq ' '
+      expect(cell.to_s).to eq '□'
     end
 
     it 'returns a string representation of the cell when flagged is true' do

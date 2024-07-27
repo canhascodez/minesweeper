@@ -32,12 +32,13 @@ module Minesweeper
 
     def run
       loop do
+        puts board
         input = get_input
         board.send(input.type, input.x, input.y)
-        puts board
       end
     rescue GameOver => e
       puts 'Game Over!'
+      puts board
       puts e.message
     end
 
@@ -51,7 +52,7 @@ module Minesweeper
     def get_input
       puts INPUT_MESSAGE
       # not sure if it's best to be more flexible with the inputs here
-      gets.chomp.match(/\A(f)?(\d+)\s+(\d+)\z/i) do |matchdata|
+      gets.chomp.match(/\A(f)?\s*(\d+)\s+(\d+)\z/i) do |matchdata|
         type = (matchdata.captures.first =~ /f/i) ? :flag : :reveal
         x, y = matchdata.captures[1..2].map(&:to_i)
         raise ArgumentError, 'Coordinates out of bounds.' unless @board.in_bounds?(x, y)

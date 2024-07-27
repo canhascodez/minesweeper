@@ -17,15 +17,15 @@ module Minesweeper
     def to_s
       # isn't this cute?
       return '⚑' if flagged
-      return '⬛' if hidden
+      return '▪' if hidden
       return '💣' if mine
 
-      adjacent_mines.zero? ? ' ' : adjacent_mines.to_s
+      adjacent_mines.zero? ? '□' : adjacent_mines.to_s
     end
 
-    def blank? = !mine && !flagged
+    def blank? = !mine && !flagged && adjacent_mines.zero?
 
-    def revealable? = !mine && !flagged
+    def number? = !mine && !flagged && !adjacent_mines.zero?
 
     def adjacent_mines = @adjacent_mines ||= board.neighbors(self).count(&:mine)
 
