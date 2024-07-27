@@ -40,13 +40,16 @@ module Minesweeper
       puts 'Game Over!'
       puts board
       puts e.message
+      # puts 'New game? (y/n)'
+      # input = gets.chomp.downcase
+      # self.class.new_random_mines if input == 'y'
     end
 
     def retry_on_fail? = true
 
     INPUT_MESSAGE = <<~INPUT_MESSAGE
-      Flag a mine by entering 'f' followed by the row and column numbers.
-      Reveal a cell by entering the row and column numbers.
+      Flag a mine by entering 'f' followed by the column (y) and row (x) numbers
+      Reveal a cell by entering the column and row numbers.
     INPUT_MESSAGE
 
     def get_input

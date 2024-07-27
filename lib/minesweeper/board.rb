@@ -80,11 +80,14 @@ module Minesweeper
     def game_won? = each_cell.all? { |cell| (cell.mine && cell.flagged) || !cell.hidden }
 
     def flag(x, y)
-      @board[y][x].flagged = !@board[y][x].flagged
+      @board[x][y].flagged = !@board[x][y].flagged
       raise GameOver, 'You win!' if game_won?
     end
 
-    def to_s = @board.map { |row| row.join(' ') }.join("\n")
+    def to_s
+      puts [*0...size.first].join(' ')
+      @board.map.with_index { |row, idx| row.join(' ') + " #{idx}"}.join("\n")
+    end
   end
   # rubocop:enable Naming/MethodParameterName
 end
