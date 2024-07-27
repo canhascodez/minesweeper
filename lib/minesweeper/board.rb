@@ -44,13 +44,6 @@ module Minesweeper
       end
     end
 
-    def immediate_neighbors(cell)
-      deltas = [[0, 1], [1, 0], [-1, 0], [0, -1]]
-      neighbors(cell).select do |neighbor|
-        deltas.include?([neighbor.x - cell.x, neighbor.y - cell.y])
-      end
-    end
-
     def contiguous_empty_cells(cell)
       # visit all empty cells, yield all neighbors unless mine or flagged
       return enum_for(:contiguous_empty_cells, cell) unless block_given?

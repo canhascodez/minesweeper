@@ -51,27 +51,6 @@ RSpec.describe Minesweeper::Board do
     end
   end
 
-  describe '#immediate_neighbors' do
-    context 'when the cell is in the corner of the board' do
-      let(:cell) { board[0][0] }
-      it 'returns an array of immediate neighboring cells' do
-        cell = board[0][0]
-        neighbors = board.immediate_neighbors(cell)
-        expect(neighbors).to be_an Array
-        expect(neighbors.size).to eq 2
-      end
-    end
-
-    context 'when the cell is in the middle of the board' do
-      let(:cell) { board[1][1] }
-      it 'returns an array of immediate neighboring cells' do
-        neighbors = board.immediate_neighbors(cell)
-        expect(neighbors).to be_an Array
-        expect(neighbors.size).to eq 4
-      end
-    end
-  end
-
   describe '#contiguous_empty_cells' do
     it 'yields each empty cell and its neighbors' do
       cells = []
