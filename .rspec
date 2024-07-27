@@ -1,0 +1,5 @@
+--require spec_helper
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
